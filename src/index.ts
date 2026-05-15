@@ -2,15 +2,17 @@ import bodyParser from "body-parser";
 import express from "express";
 import pg from "pg";
 
-// Debug: Check if DATABASE_URL is available
-if (!process.env.DATABASE_URL) {
-  console.error("ERROR: DATABASE_URL not set!");
-  console.log("Available env vars:", Object.keys(process.env).filter(k => k.includes('RAIL') || k.includes('DATA') || k.includes('DB')));
-}
+console.log("=== APP STARTUP ===");
+console.log("DATABASE_URL:", process.env.DATABASE_URL ? "SET" : "NOT SET");
+console.log("NODE_ENV:", process.env.NODE_ENV);
+console.log("PORT:", process.env.PORT);
 
 // Connect to the database using DATABASE_URL from Railway
+const dbUrl = process.env.DATABASE_URL;
+console.log("Using connection string:", dbUrl ? "✓" : "✗ MISSING");
+
 const pool = new pg.Pool({
-  connectionString: process.env.DATABASE_URL,
+  connectionString: dbUrl,
   ssl: { rejectUnauthorized: false }
 });
 
