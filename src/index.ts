@@ -2,17 +2,9 @@ import bodyParser from "body-parser";
 import express from "express";
 import pg from "pg";
 
-console.log("=== APP STARTUP ===");
-console.log("DATABASE_URL:", process.env.DATABASE_URL ? "SET" : "NOT SET");
-console.log("NODE_ENV:", process.env.NODE_ENV);
-console.log("PORT:", process.env.PORT);
-
 // Connect to the database using DATABASE_URL from Railway
-const dbUrl = process.env.DATABASE_URL;
-console.log("Using connection string:", dbUrl ? "✓" : "✗ MISSING");
-
 const pool = new pg.Pool({
-  connectionString: dbUrl,
+  connectionString: process.env.DATABASE_URL,
   ssl: { rejectUnauthorized: false }
 });
 
