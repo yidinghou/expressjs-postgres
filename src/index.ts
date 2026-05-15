@@ -2,11 +2,6 @@ import bodyParser from "body-parser";
 import express from "express";
 import pg from "pg";
 
-// Debug: Log environment variables
-console.log("DATABASE_URL:", process.env.DATABASE_URL || "NOT SET");
-console.log("NODE_ENV:", process.env.NODE_ENV || "NOT SET");
-console.log("PORT:", process.env.PORT || "NOT SET");
-
 // Connect to the database using the DATABASE_URL environment
 //   variable injected by Railway
 const pool = new pg.Pool();
