@@ -1,0 +1,47 @@
+{
+  "permissions": {
+    "bash": {
+      "allow": [
+        "railway",
+        "railway project",
+        "railway status",
+        "railway logs",
+        "railway deployments",
+        "railway service",
+        "railway variables",
+        "railway run",
+        "railway deploy",
+        "railway rollback",
+        "npm run build",
+        "npm run start",
+        "npm run dev",
+        "npm install",
+        "git status",
+        "git log",
+        "ts-node scripts"
+      ]
+    }
+  },
+  "railwayIntegration": {
+    "enabled": true,
+    "monitoringInterval": "5m",
+    "logRetention": "100 lines",
+    "autoNotify": {
+      "onCrash": true,
+      "onDatabaseFailure": true,
+      "onDeploymentFailure": true
+    },
+    "serviceName": "web",
+    "environment": "production"
+  },
+  "hooks": {
+    "afterDeploy": {
+      "command": "railway logs --tail 20",
+      "description": "Check logs after deployment"
+    },
+    "onError": {
+      "command": "railway status && railway logs --tail 50",
+      "description": "Get status and logs when errors occur"
+    }
+  }
+}
